@@ -12,5 +12,6 @@ import { SupplierController } from './suppliers.controller';
   ],
   providers: [SuppliersService],
   controllers: [SupplierController],
+  exports: [MongooseModule, SuppliersService],
 })
 export class SuppliersModule {}
