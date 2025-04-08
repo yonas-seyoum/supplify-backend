@@ -19,7 +19,6 @@ export class DashBoardDto {
           status: string;
         };
       };
-      total: number;
     },
   ];
   totalNumberOfLowStockItems: number;

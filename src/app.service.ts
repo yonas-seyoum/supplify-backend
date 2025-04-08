@@ -31,7 +31,6 @@ export class AppService {
             status: 'Warning',
           },
         },
-        total: 10,
       };
       lowStockItems.push(item);
     });

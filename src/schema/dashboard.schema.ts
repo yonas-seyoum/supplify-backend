@@ -34,7 +34,6 @@ export class DashBoard {
           status: string;
         };
       };
-      total: number;
     },
   ];
 
