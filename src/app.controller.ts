@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { DashBoardDto } from './dashboard.dto';
 
-@Controller()
+@Controller("dashboard")
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(): Promise<DashBoardDto> {
+    return this.appService.getDashboardData();
   }
 }
