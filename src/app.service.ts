@@ -18,8 +18,14 @@ export class AppService {
     let salesOverview: SalesOverview[] = [];
     sales.map((sale) => {
       const date = sale.date;
-      const month = date.toLocaleString('default', { month: 'long' });
-      return salesOverview.push({ month, revenue: 10, numberofSales: 10 });
+
+      if (date && !isNaN(new Date(date).getTime())) {
+        const month = new Date(date).toLocaleString('default', { month: 'long' });
+        salesOverview.push({ month, revenue: 10, numberofSales: 10 });
+      } else {
+        console.error('Invalid date:', date); // You can log invalid dates for debugging
+        salesOverview.push({ month: 'Invalid', revenue: 0, numberofSales: 0 });
+      }
     });
     return salesOverview;
   }
