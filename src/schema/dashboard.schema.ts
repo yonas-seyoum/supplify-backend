@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { SalesOverview } from 'src/sales/dto/sales.dto';
 
 export type DashBoardDocument = HydratedDocument<DashBoard>;
 
@@ -9,16 +10,7 @@ export class DashBoard {
   totalProducts: number;
 
   @Prop()
-  monthlySales: number;
-
-  @Prop({ type: Object })
-  salesOverview: {
-    sales: {
-      month: string;
-      amount: number;
-    };
-    totalSales: number;
-  };
+  salesOverview: Array<SalesOverview>;
 
   @Prop()
   activeSuppliers: number;
