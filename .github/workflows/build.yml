@@ -1,6 +1,7 @@
 name: Build
 on:
   pull_request:
+    branches: [master]
     types: [opened, synchronize, reopened]
 jobs:
   build_project:
@@ -31,7 +32,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download coverage reports
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: coverage-reports
       - name: SonarCloud Scan
