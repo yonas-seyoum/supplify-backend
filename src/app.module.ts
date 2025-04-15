@@ -16,7 +16,7 @@ import { SalesModule } from './sales/sales.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        uri: "mongodb+srv://yonasseyoum24:xiidkx4CqCROhEps@cluster0.fwy7j.mongodb.net/testdb?retryWrites=true&w=majority%22"
+        uri: "mongodb+srv://yonasseyoum24:xiidkx4CqCROhEps@cluster0.fwy7j.mongodb.net/testdb?retryWrites=true"
           // configService.get<string>('DB_URL'),
       }),
     }),
