@@ -15,7 +15,8 @@ import { SuppliersModule } from './suppliers/suppliers.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('DB_URL'),
+        uri: "mongodb+srv://yonasseyoum24:xiidkx4CqCROhEps@cluster0.fwy7j.mongodb.net/testdb?retryWrites=true&w=majority%22"
+          // configService.get<string>('DB_URL'),
       }),
     }),
     ProductsModule,
