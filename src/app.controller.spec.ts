@@ -1,22 +1,60 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DashBoardDto } from './dashboard.dto';
 
 describe('AppController', () => {
   let appController: AppController;
+  let appService: AppService;
+
+  const mockDashboardData: DashBoardDto = {
+    totalProducts: 50,
+    monthlySales: 200,
+    salesOverview: {
+      sales: {
+        month: 'April',
+        amount: 15000,
+      },
+      totalSales: 50000,
+    },
+    activeSuppliers: 10,
+    lowStockItems: [
+      {
+        product: {
+          name: 'Item A',
+          stockLevel: {
+            available: 5,
+            maximum: 100,
+            status: 'Low',
+          },
+        },
+      },
+    ],
+    totalNumberOfLowStockItems: 1,
+  };
+
+  const mockAppService = {
+    getDashboardData: jest.fn().mockResolvedValue(mockDashboardData),
+  };
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [{ provide: AppService, useValue: mockAppService }],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = module.get<AppController>(AppController);
+    appService = module.get<AppService>(AppService);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
+  it('should be defined', () => {
+    expect(appController).toBeDefined();
+  });
+
+  it('should return the correct dashboard data', async () => {
+    const result = await appController.getHello();
+    expect(result).toEqual(mockDashboardData);
+    expect(appService.getDashboardData).toHaveBeenCalled();
   });
 });
+
