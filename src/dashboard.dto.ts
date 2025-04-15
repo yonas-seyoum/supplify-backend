@@ -1,13 +1,8 @@
+import { SalesOverview } from './sales/dto/sales.dto';
+
 export class DashBoardDto {
   totalProducts: number;
-  monthlySales: number;
-  salesOverview: {
-    sales: {
-      month: string;
-      amount: number;
-    };
-    totalSales: number;
-  };
+  salesOverview: Array<SalesOverview>;
   activeSuppliers: number;
   lowStockItems: [
     {
