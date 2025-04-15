@@ -5,6 +5,8 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yonas-seyoum_supplify-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yonas-seyoum_supplify-backend)
+
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
