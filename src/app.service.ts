@@ -2,16 +2,33 @@ import { Injectable } from '@nestjs/common';
 import { ProductsService } from './products/products.service';
 import { SuppliersService } from './suppliers/suppliers.service';
 import { DashBoard } from './schema/dashboard.schema';
+import { SalesService } from './sales/sales.service';
+import { SalesDto, SalesOverview } from './sales/dto/sales.dto';
+import { Sales } from './schema/sales.schema';
 
 @Injectable()
 export class AppService {
   constructor(
     private readonly productsService: ProductsService,
     private readonly suppliersService: SuppliersService,
+    private readonly salesService: SalesService,
   ) {}
+
+  getSalesOverview(sales: Sales[]): SalesOverview[] {
+    let salesOverview: SalesOverview[] = [];
+    sales.map((sale) => {
+      const date = sale.date;
+      const month = date.toLocaleString('default', { month: 'long' });
+      return salesOverview.push({ month, revenue: 10, numberofSales: 10 });
+    });
+    return salesOverview;
+  }
 
   async getDashboardData(): Promise<DashBoard> {
     const products = this.productsService.getProducts();
+    const suppliers = this.suppliersService.getSuppliers();
+    const sales = this.salesService.getSales();
+    const salesOverview = this.getSalesOverview(await sales);
 
     const totalProducts = (await products).length;
 
@@ -35,25 +52,13 @@ export class AppService {
       lowStockItems.push(item);
     });
 
-    const suppliers = this.suppliersService.getSuppliers();
-
     const activeSuppliers = (await suppliers).filter((supplier) => {
       return supplier.status === 'active';
     }).length;
 
     const dashboardData = {
       totalProducts,
-
-      //needs to be integrated after sales api is integrated
-      monthlySales: 10,
-      salesOverview: {
-        sales: {
-          month: 'January',
-          amount: 10,
-        },
-        totalSales: 562,
-      },
-
+      salesOverview,
       activeSuppliers,
       lowStockItems,
       totalNumberOfLowStockItems: lowStockItems.length,
